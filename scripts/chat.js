@@ -52,19 +52,3 @@ class Chatroom {
   }
 }
 
-const chatroom = new Chatroom('general', 'thom');
-
-// get the chats that were previously added to the database
-chatroom.getChats((data) => {
-  console.log(data);
-});
-
-// TEST ONLY
-// setTimeout(() => {
-//   chatroom.updateRoom('music');
-//   chatroom.updateName('Susan');
-//   chatroom.getChats((data) => {
-//     console.log(data);
-//   });
-//   chatroom.addChat('hello from music');
-// }, 3000);
