@@ -1,6 +1,6 @@
 // The Chatroom Class
 
-// setting up a real-time listener to get new chats
+
 
 // updating the username
 
@@ -26,10 +26,24 @@ class Chatroom {
     const response = await this.chats.add(chat);
     return response;
   }
+  // set up a real-time listener on database to get changes as they occur
+  // will iniitally load all previously-added documents when called below
+  getChats(callback) {
+    this.chats
+      .onSnapshot(snapshot => {
+        snapshot.docChanges().forEach(change => {
+          if(change.type === 'added') {
+            // update UI here
+            callback(change.doc.data());
+          }
+        });
+      });
+  }
 }
 
 const chatroom = new Chatroom('movies', 'thom');
-// testing only
-// chatroom.addChat('This is a new movies message')
-//   .then(() => console.log('new message added'))
-//   .catch(err => console.log(err));
+
+// get the chats that were previously added to the database
+chatroom.getChats((data) => {
+  console.log(data);
+});
