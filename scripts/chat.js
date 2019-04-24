@@ -1,18 +1,13 @@
 // The Chatroom Class
 
-
-
-// updating the username
-
-// updating the room
-
 class Chatroom {
   constructor(room, username) {
     this.room = room;
     this.username = username;
     this.chats = db.collection('chats');
+    this.unsub;
   }
-  // adding new chat documents
+  // adding new chat documents method ***********
   async addChat(message) {
     // format a chat object
     const now = new Date();
@@ -26,10 +21,11 @@ class Chatroom {
     const response = await this.chats.add(chat);
     return response;
   }
+  // get chats method *******************
   // set up a real-time listener on database to get changes as they occur
   // will iniitally load all previously-added documents when called below
   getChats(callback) {
-    this.chats
+    this.unsub = this.chats
       .where('room', '==', this.room) // never use strict equality here
       .orderBy('created_at') // will require an index created by Firebase
       .onSnapshot(snapshot => {
@@ -41,11 +37,34 @@ class Chatroom {
         });
       });
   }
+  // updating the username method *****************
+  updateName(username) {
+    this.username = username;
+  }
+
+  // updating the chatroom method *****************
+  updateRoom(room) {
+    this.room = room;
+    console.log('room updated to ' + room); // test only
+    if(this.unsub) {
+      this.unsub();
+    }    
+  }
 }
 
-const chatroom = new Chatroom('movies', 'thom');
+const chatroom = new Chatroom('general', 'thom');
 
 // get the chats that were previously added to the database
 chatroom.getChats((data) => {
   console.log(data);
 });
+
+// TEST ONLY
+// setTimeout(() => {
+//   chatroom.updateRoom('music');
+//   chatroom.updateName('Susan');
+//   chatroom.getChats((data) => {
+//     console.log(data);
+//   });
+//   chatroom.addChat('hello from music');
+// }, 3000);
