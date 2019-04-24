@@ -30,6 +30,8 @@ class Chatroom {
   // will iniitally load all previously-added documents when called below
   getChats(callback) {
     this.chats
+      .where('room', '==', this.room) // never use strict equality here
+      .orderBy('created_at') // will require an index created by Firebase
       .onSnapshot(snapshot => {
         snapshot.docChanges().forEach(change => {
           if(change.type === 'added') {
