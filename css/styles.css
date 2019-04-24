@@ -21,3 +21,13 @@
   border-color: #34a36b;
   box-shadow: none;
 }
+
+.username {
+  font-weight: bold;
+  color: #8e4d91;
+}
+
+.time {
+  font-size: 0.7em;
+  color: #999;
+}
