@@ -1,0 +1,23 @@
+.container {
+  max-width: 600px;
+}
+
+.page-title {
+  color: #34a36b;
+}
+
+.btn {
+  background: #34a36b;
+  color: #fff;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.btn:focus {
+  outline: none !important;
+}
+
+.form-control:focus {
+  border-color: #34a36b;
+  box-shadow: none;
+}
