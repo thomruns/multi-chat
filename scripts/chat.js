@@ -9,8 +9,9 @@ class Chatroom {
   }
   // adding new chat documents method ***********
   async addChat(message) {
-    // format a chat object
+    // capture the date
     const now = new Date();
+    // construct a new chat object
     const chat = {
       message: message,
       username: this.username,
@@ -19,6 +20,7 @@ class Chatroom {
     };
     // save chat document to database
     const response = await this.chats.add(chat);
+    // return the response
     return response;
   }
   // get chats method *******************
@@ -40,6 +42,8 @@ class Chatroom {
   // updating the username method *****************
   updateName(username) {
     this.username = username;
+    // store this name in local storage
+    localStorage.setItem('username', username);
   }
 
   // updating the chatroom method *****************
