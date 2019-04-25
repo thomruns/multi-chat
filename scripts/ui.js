@@ -8,6 +8,10 @@ class ChatUI {
   constructor(list) {
     this.list = list;
   }
+  // method to clear the chat UI
+  clear() {
+    this.list.innerHTML = '';
+  }
   // render chat templates to the DOM method
   render(data) {
     const when = dateFns.distanceInWordsToNow(

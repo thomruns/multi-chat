@@ -49,10 +49,11 @@ class Chatroom {
   // updating the chatroom method *****************
   updateRoom(room) {
     this.room = room;
-    console.log('room updated to ' + room); // test only
+    // console.log('room updated to ' + room); // test only
     if(this.unsub) {
       this.unsub();
     }    
   }
+  
 }
 
