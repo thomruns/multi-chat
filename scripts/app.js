@@ -49,12 +49,12 @@ newNameForm.addEventListener('submit', e => {
 roomSelector.addEventListener('click', (e) => {
   if(e.target.tagName === 'BUTTON') {
     const room = e.target.getAttribute('id');
-    console.log(room);
+    // console.log(room);  // TEST ONLY
     // clear the UI
     chatUI.clear();
     chatroom.updateRoom(room);
     chatroom.getChats(chat => chatUI.render(chat));
-    chatTitle.textContent = `You are in the ${room} chatroom`
+    chatTitle.textContent = `You are here: #${room} chatroom`
   }
 });
 
