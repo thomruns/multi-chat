@@ -18,11 +18,21 @@ const db = firebase.firestore(); // reference the database
 // DOM queries
 const chatList = document.querySelector('.chat-list');
 const updateMsg = document.querySelector('.update-mssg');
+const newChatForm = document.querySelector('.new-chat');
+
+// add a new chat
+newChatForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const message = newChatForm.message.value.trim();
+  chatroom.addChat(message)
+    .then(() => newChatForm.reset())
+    .catch(err => console.log(err));
+});
 
 
 // Class instances
 const chatUI = new ChatUI(chatList);
-const chatroom = new Chatroom('general', 'thom');
+const chatroom = new Chatroom('movies', 'thom');
 
 // get the chats that were previously added to the database
 chatroom.getChats(data => chatUI.render(data));
